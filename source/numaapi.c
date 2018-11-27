@@ -1,4 +1,4 @@
-// Copyright (c) 2016, libnumaapi authors
+// Copyright (c) 2018, libnumaapi authors
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -20,41 +20,18 @@
 //
 // Author: Sergey Sharybin (sergey.vfx@gmail.com)
 
-#ifndef __LIBNUMAAPI_H__
-#define __LIBNUMAAPI_H__
+#include "numaapi.h"
 
-#include <stddef.h>
+#include <assert.h>
 
-typedef enum {
-  LIBNUMAAPI_SUCCESS     = 0,
-  // Generic error, no real details are available,
-  LIBNUMAAPI_ERROR       = 1,
-  // NUMA is not available on this platform.
-  LIBNUMAAPI_INAVAILABLE = 2,
-} NUMAPIResult;
-
-// Initialize NUMA API.
-//
-// This is first call which should be called before any other NUMA functions
-// can be used.
-NUMAPIResult numaApiInitialize(void);
-
-// Get number of available nodes.
-//
-// This is in fact an index of last node plus one and it's not guaranteed all
-// nodes up to this one are available.
-int numaApiGetNumNodes(void);
-
-// Returns non-zero if the given node is available for compute.
-int numApiIsNodeAvailable(int node);
-
-// Allocate memory on a given node,
-void* numaApiAllocateOnNode(size_t size, int node);
-
-// Allocate memory in the local memory.
-void* numaApiAllocateLocal(size_t size);
-
-// Frees size bytes of memory starting at start.
-void numaApiFree(void* start, size_t size);
-
-#endif
+// Get string representation of NUMAPIResult.
+const char* numaAPI_ResultAsString(NUMAAPI_Result result) {
+  switch (result) {
+    case NUMAAPI_SUCCESS: return "SUCCESS";
+    case NUMAAPI_NOT_AVAILABLE: return "NOT_AVAILABLE";
+    case NUMAAPI_ERROR: return "ERROR";
+    case NUMAAPI_ERROR_ATEXIT: return "ERROR_AT_EXIT";
+  }
+  assert(!"Unknown result was passed to numapi_ResultAsString().");
+  return "UNKNOWN";
+}

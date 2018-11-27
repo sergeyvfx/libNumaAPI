@@ -1,3 +1,31 @@
+# Generic files to ignore
+.*
+.*.swp
+
+# Editors
+*~
+*.swp
+*.swo
+*#
+.vscode
+
+# QtCreator
+CMakeLists.txt.user
+
+# ms-windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Local patches
+/*.patch
+/*.diff
+
+# Build folders
+bin-dbg
+bin-opt
+build*/
+
+# Python temp paths
+__pycache__/
 *.py[cod]
-build
-/build

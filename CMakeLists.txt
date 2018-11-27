@@ -48,10 +48,12 @@ endif()
 include_directories(include)
 
 add_library(libnumaapi
-  source/libnumaapi.c
-  source/libnumaapi_linux.c
+  source/numaapi.c
+  source/numaapi_stub.c
+  source/numaapi_linux.c
+  source/numaapi_win32.c
 
-  include/libnumaapi.h
+  include/numaapi.h
 )
 
 if(UNIX AND NOT APPLE)

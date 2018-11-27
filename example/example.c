@@ -23,23 +23,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "libnumaapi.h"
+#include "numaapi.h"
 
 int main(int argc, char** argv) {
-  if (numaApiInitialize() != LIBNUMAAPI_SUCCESS) {
+  (void) argc;  // Ignored.
+  (void) argv;  // Ignored.
+  if (numaAPI_Initialize() != NUMAAPI_SUCCESS) {
     fprintf(stderr, "NUMA API initialization failure.\n");
     return EXIT_FAILURE;
   }
-  const int num_nodes = numaApiGetNumNodes();
+  const int num_nodes = numaAPI_GetNumNodes();
   printf("NUMA API successfully initialized.\n");
   printf("Number of nodes: %d\n", num_nodes);
   int node;
   for (node = 0; node < num_nodes; ++node) {
     printf("Node %d:\n", node);
-    printf("  Available: %d\n", numApiIsNodeAvailable(node));
-    int* test_memory = numaApiAllocateOnNode(sizeof(int), node);
+    printf("  Available: %s\n",
+           numaAPI_IsNodeAvailable(node) ? "True" : "False");
+    const int num_processors = numaAPI_GetNumNodeProcessors(node);
+    printf("  Number of processors: %d\n", num_processors);
+    int* test_memory = numaAPI_AllocateOnNode(sizeof(int), node);
     printf("  Test memory allocated: %p\n", test_memory);
-    numaApiFree(test_memory, sizeof(test_memory));
+    numaAPI_Free(test_memory, sizeof(test_memory));
   }
   return EXIT_SUCCESS;
 }

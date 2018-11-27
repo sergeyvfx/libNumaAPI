@@ -20,39 +20,63 @@
 //
 // Author: Sergey Sharybin (sergey.vfx@gmail.com)
 
-#include "libnumaapi.h"
+#include "numaapi.h"
+
+#include "build_config.h"
 
 // Stub implementation for platforms which doesn't have NUMA support.
 
-#if !defined(__linux__) && !defined(_WIN32)
+#if !OS_LINUX && !OS_WIN
 
-NUMAPIResult numaApiInitialize(void) {
-  return LIBNUMAAPI_INAVAILABLE;
+////////////////////////////////////////////////////////////////////////////////
+// Initialization.
+
+NUMAPIResult numaAPI_Initialize(void) {
+  return UMAAPI_NOT_AVAILABLE;
 }
 
-int numaApiGetNumNodes(void) {
+////////////////////////////////////////////////////////////////////////////////
+// Topology query.
+
+int numaAPI_GetNumNodes(void) {
   return 0;
 }
 
-int numApiIsNodeAvailable(int node) {
-  (void) node;
+bool numApiIsNodeAvailable(int node) {
+  (void) node;  // Ignored.
+  return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Affinities.
+
+bool numaAPI_RunProcessOnNode(int node) {
+  (void) node;  // Ignored.
+  return false;
+}
+
+bool numaAPI_RunThreadOnNode(int node) {
+  (void) node;  // Ignored.
+  return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Memory management.
+
+void* numaAPI_AllocateOnNode(size_t size, int node) {
+  (void) size;  // Ignored.
+  (void) node;  // Ignored.
   return 0;
 }
 
-void* numaApiAllocateOnNode(size_t size, int node) {
-  (void) size;
-  (void) node;
-  return 0;
-}
-
-void* numaApiAllocateLocal(size_t size) {
-  (void) size;
+void* numaAPI_AllocateLocal(size_t size) {
+  (void) size;  // Ignored.
   return NULL;
 }
 
-void numaApiFree(void* start, size_t size) {
-  (void) start;
-  (void) size;
+void numaAPI_Free(void* start, size_t size) {
+  (void) start;  // Ignored.
+  (void) size;  // Ignored.
 }
 
-#endif
+#endif  // !OS_LINUX && !OS_WIN
