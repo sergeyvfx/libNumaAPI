@@ -35,6 +35,8 @@ int main(int argc, char** argv) {
   const int num_nodes = numaAPI_GetNumNodes();
   printf("NUMA API successfully initialized.\n");
   printf("Number of nodes: %d\n", num_nodes);
+  printf("Number of processors on current nodes: %d\n",
+         numaAPI_GetNumCurrentNodesProcessors());
   int node;
   for (node = 0; node < num_nodes; ++node) {
     printf("Node %d:\n", node);
