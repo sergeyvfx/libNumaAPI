@@ -307,6 +307,17 @@
 #    define ARCH_CPU_32_BITS 1
 #    define ARCH_CPU_BIG_ENDIAN 1
 #  endif
+#elif defined(__powerpc64__)
+#  define ARCH_CPU_PPC_FAMILY 1
+#  define ARCH_CPU_PPC 1
+#  define ARCH_CPU_64_BITS 1
+#  if defined(__BIG_ENDIAN__)
+#    define ARCH_CPU_BIG_ENDIAN 1
+#  elif defined(__LITTLE_ENDIAN)
+#    define ARCH_CPU_LITTLE_ENDIAN 1
+#  else
+#    error Please define your endianness
+#  endif
 #else
 #  error Please add support for your architecture in build_config.h
 #endif
