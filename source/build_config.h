@@ -349,6 +349,10 @@
 #  define ARCH_CPU_MIPS64_FAMILY 0
 #endif
 
+#if !defined(ARCH_CPU_PPC_FAMILY)
+#  define ARCH_CPU_PPC_FAMILY 0
+#endif
+
 ////////////////////////////////////////////////////////////////////////////////
 // Sizes of platform-dependent types.
 
