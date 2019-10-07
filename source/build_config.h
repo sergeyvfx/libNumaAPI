@@ -318,6 +318,16 @@
 #  else
 #    error Please define your endianness
 #  endif
+#elif defined(__s390x__)
+#  define ARCH_CPU_S390_FAMILY 1
+#  define ARCH_CPU_S390X 1
+#  define ARCH_CPU_64_BITS 1
+#  define ARCH_CPU_BIG_ENDIAN 1
+#elif defined(__s390__)
+#  define ARCH_CPU_S390_FAMILY 1
+#  define ARCH_CPU_S390 1
+#  define ARCH_CPU_31_BITS 1
+#  define ARCH_CPU_BIG_ENDIAN 1
 #else
 #  error Please add support for your architecture in build_config.h
 #endif
@@ -350,6 +360,9 @@
 #endif
 #if !defined(ARCH_CPU_PPC_FAMILY)
 #  define ARCH_CPU_PPC_FAMILY 0
+#endif
+#if !defined(ARCH_CPU_S390_FAMILY)
+#  define ARCH_CPU_S390_FAMILY 0
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
