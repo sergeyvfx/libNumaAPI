@@ -223,7 +223,7 @@ int numaAPI_GetNumCurrentNodesProcessors(void) {
   }
   // First, count number of possible bits in the affinity mask.
   const int num_processors = countNumSetBits(group_affinity.Mask);
-  // Then check that it's not exceeding number of processors in tjhe group.
+  // Then check that it's not exceeding number of processors in the group.
   const int num_group_processors =
       _GetActiveProcessorCount(group_affinity.Group);
   if (num_group_processors < num_processors) {
@@ -237,7 +237,7 @@ int numaAPI_GetNumCurrentNodesProcessors(void) {
 
 bool numaAPI_RunProcessOnNode(int node) {
   // TODO(sergey): Make sure requested node is within active CPU group.
-  // Change affinity of the proces to make it to run on a given node.
+  // Change affinity of the process to make it to run on a given node.
   HANDLE process_handle = GetCurrentProcess();
   GROUP_AFFINITY processor_mask = { 0 };
   if (_GetNumaNodeProcessorMaskEx(node, &processor_mask) == 0) {
