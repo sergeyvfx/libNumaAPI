@@ -230,7 +230,7 @@
 // Check what is the latest C++ specification the compiler supports.
 //
 // NOTE: Use explicit definition here to avoid expansion-to-defined warning from
-// being geenrated. While this will most likely a false-positive warning in this
+// being generated. While this will most likely a false-positive warning in this
 // particular case, that warning might be helpful to catch errors elsewhere.
 
 // C++11 check.
@@ -260,7 +260,7 @@
 #endif
 
 // COMPILER_USE_ADDRESS_SANITIZER is defined when program is detected that
-// compilation happened wit haddress sanitizer enabled. This allows to give
+// compilation happened with address sanitizer enabled. This allows to give
 // tips to sanitizer, or maybe work around some known issues with third party
 // libraries.
 #if !defined(COMPILER_USE_ADDRESS_SANITIZER)
